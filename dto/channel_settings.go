@@ -1,0 +1,41 @@
+package dto
+
+type ChannelSettings struct {
+	ForceFormat            bool   `json:"force_format,omitempty"`
+	ThinkingToContent      bool   `json:"thinking_to_content,omitempty"`
+	Proxy                  string `json:"proxy"`
+	PassThroughBodyEnabled bool   `json:"pass_through_body_enabled,omitempty"`
+	SystemPrompt           string `json:"system_prompt,omitempty"`
+	SystemPromptOverride   bool   `json:"system_prompt_override,omitempty"`
+}
+
+type VertexKeyType string
+
+const (
+	VertexKeyTypeJSON   VertexKeyType = "json"
+	VertexKeyTypeAPIKey VertexKeyType = "api_key"
+)
+
+type AwsKeyType string
+
+const (
+	AwsKeyTypeAKSK   AwsKeyType = "ak_sk" 
+	AwsKeyTypeApiKey AwsKeyType = "api_key"
+)
+
+type ChannelOtherSettings struct {
+	AzureResponsesVersion string        `json:"azure_responses_version,omitempty"`
+	VertexKeyType         VertexKeyType `json:"vertex_key_type,omitempty"` 
+	OpenRouterEnterprise  *bool         `json:"openrouter_enterprise,omitempty"`
+	AllowServiceTier      bool          `json:"allow_service_tier,omitempty"`      
+	DisableStore          bool          `json:"disable_store,omitempty"`           
+	AllowSafetyIdentifier bool          `json:"allow_safety_identifier,omitempty"` 
+	AwsKeyType            AwsKeyType    `json:"aws_key_type,omitempty"`
+}
+
+func (s *ChannelOtherSettings) IsOpenRouterEnterprise() bool {
+	if s == nil || s.OpenRouterEnterprise == nil {
+		return false
+	}
+	return *s.OpenRouterEnterprise
+}
